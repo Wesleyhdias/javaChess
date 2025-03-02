@@ -33,7 +33,7 @@ public class King extends ChessPiece{
 
             }else{ 
 
-                if(oppPiece.possibleMove(position, false, null, null)){
+                if(oppPiece.possibleMove(position)){
                     return false;
                 }
             }
@@ -44,7 +44,7 @@ public class King extends ChessPiece{
         
         
     @Override
-    public boolean[][] possibleMoves(boolean inCheck, Position kingPosition, Position oppPiece) {
+    public boolean[][] possibleMoves() {
 
 
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];

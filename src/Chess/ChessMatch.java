@@ -19,8 +19,6 @@ public class ChessMatch {
     private Board board;
     private int turn;
 
-    // protected static List<ChessPiece> onBoardPieces = new ArrayList<>();
-    // protected List<ChessPiece> capturedPieces = new ArrayList<>();
     protected Position oppCheckingPiece = null;
 
     
@@ -89,7 +87,7 @@ public class ChessMatch {
             }
         }
 
-        throw new ChessException("como que nÃ£o tem rei na partida????");
+        throw new ChessException("como que não tem rei na partida????");
 
     }
 
@@ -100,7 +98,7 @@ public class ChessMatch {
 
 
         for(ChessPiece piece : oppPieces){
-            boolean[][] pMoves = piece.possibleMoves(false, getKing(currentPlayer).getChessPosition().toPosition(), null);
+            boolean[][] pMoves = piece.possibleMoves();
 
             if(pMoves[king.getRow()][king.getColumn()]){
                 oppCheckingPiece = piece.getChessPosition().toPosition();
@@ -119,18 +117,15 @@ public class ChessMatch {
         if(currentPlayer != ((ChessPiece)board.getPiece(position)).getColor()){
             throw new ChessException("you can move only your pieces.");
         }
-        if(!board.getPiece(position).hasPossibleMove(inCheck, getKing(currentPlayer).getChessPosition().toPosition(), oppCheckingPiece)){
+        if(!board.getPiece(position).hasPossibleMove()){
             throw new ChessException("there is no move available for the informed piece");
         }
     }
 
     private void ableToMoveTo(Position inPosition, Position outPosition){
-        if(!board.getPiece(inPosition).possibleMove(outPosition, inCheck, getKing(currentPlayer).getChessPosition().toPosition(), oppCheckingPiece)){
+        if(!board.getPiece(inPosition).possibleMove(outPosition)){
             throw new ChessException("this piece cant move to informed position");
         }
-        // if(isInCheck() && board.getPiece(inPosition).){
-        //     throw new ChessException("King is in check! protect him!");
-        // }
     }
 
     private ChessPiece move(Position inPosition, Position outPosition){
@@ -138,11 +133,20 @@ public class ChessMatch {
         Piece capturedPiece = board.removePiece(outPosition);
         board.placePiece(p, outPosition);
 
-        nextTurn();
-
         return (ChessPiece)capturedPiece;
     }
 
+
+    private void undoMove(Position inPosition, Position outPosition, ChessPiece capturedPiece){
+    
+        Piece p = board.removePiece(outPosition);
+        board.placePiece(p, inPosition);
+
+        if(capturedPiece != null){
+            board.placePiece(capturedPiece, outPosition);
+        }
+    
+    }
     public ChessPiece movePiece(ChessPosition inChessPosition, ChessPosition outChessPosition){
 
         Position inPosition = inChessPosition.toPosition();
@@ -153,6 +157,18 @@ public class ChessMatch {
         ableToMoveTo(inPosition, outPosition);
 
         ChessPiece capturedPiece = move(inPosition, outPosition);
+
+        if(isInCheck()){
+            undoMove(inPosition, outPosition, capturedPiece);
+            if(inCheck)
+                throw new ChessException("King is in check! you must protect him!");
+
+            throw new ChessException("You cant left the King in check!");
+        }
+
+
+        nextTurn();
+
         return capturedPiece;
 
 
@@ -163,7 +179,7 @@ public class ChessMatch {
         Position inPosition = inChessPosition.toPosition();
         ableToMove(inPosition);
 
-        return board.getPiece(inPosition).possibleMoves(inCheck, getKing(currentPlayer).getChessPosition().toPosition(), oppCheckingPiece);
+        return board.getPiece(inPosition).possibleMoves();
     }
 
     private void initialSetup(){

@@ -15,26 +15,13 @@ public class Rook extends ChessPiece{
 
     }
 
-    private boolean hasOppKing(Position pos){
+    private boolean hasKing(Position pos){
 
-        return (getBoard().getPiece(pos).getClass().getName() == "Chess.ChessPieces.King" && !hasOpponentPiece(pos)) || !(getBoard().getPiece(pos).getClass().getName() == "Chess.ChessPieces.King");
-    }
-
-
-    private boolean betweenKingColumn(Position pos, Position king, Position oppPiece){
-
-        return (king.getColumn() >= oppPiece.getColumn() && pos.getColumn() >= oppPiece.getColumn() && pos.getColumn() <= king.getColumn()) || (king.getColumn() <= oppPiece.getColumn() && pos.getColumn() <= oppPiece.getColumn() && pos.getColumn() >= king.getColumn());
-
-    }
-
-    private boolean betweenKingRow(Position pos, Position king, Position oppPiece){
-
-        return (king.getRow() >= oppPiece.getRow() && pos.getRow() >= oppPiece.getRow() && pos.getRow() <= king.getRow()) || (king.getRow() <= oppPiece.getRow() && pos.getRow() <= oppPiece.getRow() && pos.getRow() >= king.getRow());
-
+        return (getBoard().getPiece(pos).getClass().getName() == "Chess.ChessPieces.King");
     }
 
     @Override
-    public boolean[][] possibleMoves(boolean inCheck, Position king, Position oppPiece) {
+    public boolean[][] possibleMoves() {
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
         Position pos = new Position(0, 0);
 
@@ -42,7 +29,7 @@ public class Rook extends ChessPiece{
             for(int j = 0; j < getBoard().getColumns(); j++){
                 between[i][j] = false;
             }
-        } // uma precaução
+        } // uma precau??o
 
 
         // cima
@@ -50,32 +37,18 @@ public class Rook extends ChessPiece{
         while(getBoard().hasPosition(pos)){
             
 
-            if(getBoard().hasPiace(pos) && (!hasOpponentPiece(pos) 
-            || hasOppKing(pos))){
-                break;             
-            }
-
-            if(inCheck && oppPiece != null){ 
-                
-                if(betweenKingColumn(pos, king, oppPiece)){
-                    between[pos.getRow()][pos.getColumn()] = true;
-                    continue;
+            if(getBoard().hasPiace(pos)){
+                if (hasOpponentPiece(pos)) {
+                    mat[pos.getRow()][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() - 1, pos.getColumn())){
+                        mat[pos.getRow() - 1][pos.getColumn()] = true;
+                    }
                 }
-                
+                break;             
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
             pos.setRow(pos.getRow() - 1);
-        }
-        if(getBoard().hasPosition(pos)){
-            if(hasOpponentPiece(pos) && !inCheck) {
-                mat[pos.getRow()][pos.getColumn()] = true;
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
-
-            if(inCheck && (betweenKingColumn(pos, king, oppPiece))){
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
         }
 
 
@@ -84,33 +57,19 @@ public class Rook extends ChessPiece{
         while(getBoard().hasPosition(pos)){
             
 
-            if(getBoard().hasPiace(pos) && (!hasOpponentPiece(pos) 
-            || hasOppKing(pos))){
-                break;
-            }
-            
-            if(inCheck && oppPiece != null){ 
-                
-                if(betweenKingColumn(pos, king, oppPiece)){
-                    between[pos.getRow()][pos.getColumn()] = true;
-                    continue;
+            if(getBoard().hasPiace(pos)){
+                if (hasOpponentPiece(pos)) {
+                    mat[pos.getRow()][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() + 1, pos.getColumn())){
+                        mat[pos.getRow() + 1][pos.getColumn()] = true;
+                    }
                 }
-                
+                break;
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
             pos.setRow(pos.getRow() + 1);
         }
-        if(getBoard().hasPosition(pos)){
-            if(hasOpponentPiece(pos) && !inCheck){
-                mat[pos.getRow()][pos.getColumn()] = true;
-            }
-
-            if(inCheck && (betweenKingColumn(pos, king, oppPiece))){
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
-        }
-
         
 
         // direita
@@ -118,32 +77,24 @@ public class Rook extends ChessPiece{
         while(getBoard().hasPosition(pos)){
             
 
-            
-            if(getBoard().hasPiace(pos) && (!hasOpponentPiece(pos) 
-            || hasOppKing(pos))){
-                break;
-            }
-            
-            if(inCheck && oppPiece != null){ 
-                
-                if(betweenKingColumn(pos, king, oppPiece)){
-                    between[pos.getRow()][pos.getColumn()] = true;
-                    continue;
+            if(getBoard().hasPiace(pos)){
+                if (hasOpponentPiece(pos)) {
+                    mat[pos.getRow()][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow(), pos.getColumn() + 1)){
+                        mat[pos.getRow()][pos.getColumn() + 1] = true;
+                    }
                 }
-                
+                break;
             }
             
             mat[pos.getRow()][pos.getColumn()] = true;
             pos.setColumn(pos.getColumn() + 1);
         }
         if(getBoard().hasPosition(pos)){
-            
-            if(inCheck && (betweenKingRow(pos, king, oppPiece))){
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
+    
             if(hasOpponentPiece(pos)){
                 mat[pos.getRow()][pos.getColumn()] = true;
-                between[pos.getRow()][pos.getColumn()] = true;
+                
             }
         }
 
@@ -153,45 +104,21 @@ public class Rook extends ChessPiece{
         while(getBoard().hasPosition(pos)){
             
 
-            if(getBoard().hasPiace(pos) && (!hasOpponentPiece(pos) 
-            || hasOppKing(pos))){
-                break;
-            }
-
-            if(inCheck && oppPiece != null){ 
-                System.out.println("aa");
-                if(betweenKingColumn(pos, king, oppPiece)){
-                    between[pos.getRow()][pos.getColumn()] = true;
+            if(getBoard().hasPiace(pos)){
+                if (hasOpponentPiece(pos)) {
+                    mat[pos.getRow()][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow(), pos.getColumn() - 1)){
+                        mat[pos.getRow()][pos.getColumn() - 1] = true;
+                    }
                 }
-                
-                pos.setColumn(pos.getColumn() - 1);
-                continue;
+                break;
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
             pos.setColumn(pos.getColumn() - 1);
         }
-        if(getBoard().hasPosition(pos)){
-            if(hasOpponentPiece(pos) && !inCheck){
-                mat[pos.getRow()][pos.getColumn()] = true;
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
-
-            if(inCheck && (betweenKingRow(pos, king, oppPiece))){
-                between[pos.getRow()][pos.getColumn()] = true;
-            }
-        }
         
-        
-        if(inCheck){
-            return between;
-        }
         return mat;
-    }
-
-
-    public boolean[][] pieceToKingMoves(){
-        return between;
     }
 
     @Override

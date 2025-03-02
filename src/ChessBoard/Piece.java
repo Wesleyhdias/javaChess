@@ -16,14 +16,14 @@ public abstract class Piece {
         return board;
     }
  
-    public abstract boolean[][] possibleMoves(boolean inCheck, Position kingPosition, Position oppPiece);
+    public abstract boolean[][] possibleMoves();
 
-    public boolean possibleMove(Position position, boolean inCheck, Position kingPosition, Position oppPiece) {
-        return possibleMoves(inCheck, kingPosition, oppPiece)[position.getRow()][position.getColumn()];
+    public boolean possibleMove(Position position) {
+        return possibleMoves()[position.getRow()][position.getColumn()];
     }
 
-    public boolean hasPossibleMove(boolean inCheck, Position kingPosition, Position oppPiece) {
-        boolean[][] mat = possibleMoves(inCheck, kingPosition, oppPiece);
+    public boolean hasPossibleMove() {
+        boolean[][] mat = possibleMoves();
 
         for(int i = 0; i < mat.length; i++) {
             for(int j = 0; j < mat.length; j++) {
