@@ -1,13 +1,14 @@
 package Chess.ChessPieces;
 
 import ChessBoard.Position;
-import Chess.ChessPiece;
-import Chess.PieceColor;
 import ChessBoard.Board;
+import Chess.PieceColor;
+import Chess.ChessPiece;
 
-public class Rook extends ChessPiece{
 
-    public Rook(Board board, PieceColor color) {
+public class Bishop extends ChessPiece{
+
+    public Bishop(Board board, PieceColor color) {
         super(board, color);
     }
 
@@ -21,48 +22,48 @@ public class Rook extends ChessPiece{
         boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
         Position pos = new Position(0, 0);
 
-        // cima
-        pos.setPosition(position.getRow() - 1, position.getColumn());
+        // cima direita
+        pos.setPosition(position.getRow() - 1, position.getColumn() + 1);
         while(getBoard().hasPosition(pos)){
             
-            if(getBoard().hasPiace(pos)){
 
+            if(getBoard().hasPiace(pos)){
                 if (hasOpponentPiece(pos)) {
                     mat[pos.getRow()][pos.getColumn()] = true;
-                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() - 1, pos.getColumn())){
-                        mat[pos.getRow() - 1][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() - 1, pos.getColumn() + 1)){
+                        mat[pos.getRow() - 1][pos.getColumn() + 1] = true;
                     }
                 }
                 break;             
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
-            pos.setRow(pos.getRow() - 1);
+            pos.setPosition(pos.getRow() - 1, pos.getColumn() + 1);
         }
 
 
-        // baixo
-        pos.setPosition(position.getRow() + 1, position.getColumn());
+        // baixo direita
+        pos.setPosition(position.getRow() + 1, position.getColumn() + 1);
         while(getBoard().hasPosition(pos)){
             
 
             if(getBoard().hasPiace(pos)){
                 if (hasOpponentPiece(pos)) {
                     mat[pos.getRow()][pos.getColumn()] = true;
-                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() + 1, pos.getColumn())){
-                        mat[pos.getRow() + 1][pos.getColumn()] = true;
+                    if(hasKing(pos) && getBoard().hasPosition(pos.getRow() + 1, pos.getColumn() - 1)){
+                        mat[pos.getRow() + 1][pos.getColumn() + 1] = true;
                     }
                 }
                 break;
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
-            pos.setRow(pos.getRow() + 1);
+            pos.setPosition(pos.getRow() + 1, pos.getColumn() + 1);
         }
         
 
-        // direita
-        pos.setPosition(position.getRow(), position.getColumn() + 1);
+        // cima esquerda
+        pos.setPosition(position.getRow() - 1, position.getColumn() - 1);
         while(getBoard().hasPosition(pos)){
             
 
@@ -70,14 +71,14 @@ public class Rook extends ChessPiece{
                 if (hasOpponentPiece(pos)) {
                     mat[pos.getRow()][pos.getColumn()] = true;
                     if(hasKing(pos) && getBoard().hasPosition(pos.getRow(), pos.getColumn() + 1)){
-                        mat[pos.getRow()][pos.getColumn() + 1] = true;
+                        mat[pos.getRow() - 1][pos.getColumn() - 1] = true;
                     }
                 }
                 break;
             }
             
             mat[pos.getRow()][pos.getColumn()] = true;
-            pos.setColumn(pos.getColumn() + 1);
+            pos.setPosition(pos.getRow() - 1, pos.getColumn() - 1);
         }
         if(getBoard().hasPosition(pos)){
     
@@ -88,8 +89,8 @@ public class Rook extends ChessPiece{
         }
 
 
-        // esquerda
-        pos.setPosition(position.getRow(), position.getColumn() - 1);
+        // baixo esquerda
+        pos.setPosition(position.getRow() + 1, position.getColumn() - 1);
         while(getBoard().hasPosition(pos)){
             
 
@@ -97,14 +98,14 @@ public class Rook extends ChessPiece{
                 if (hasOpponentPiece(pos)) {
                     mat[pos.getRow()][pos.getColumn()] = true;
                     if(hasKing(pos) && getBoard().hasPosition(pos.getRow(), pos.getColumn() - 1)){
-                        mat[pos.getRow()][pos.getColumn() - 1] = true;
+                        mat[pos.getRow() + 1][pos.getColumn() - 1] = true;
                     }
                 }
                 break;
             }
 
             mat[pos.getRow()][pos.getColumn()] = true;
-            pos.setColumn(pos.getColumn() - 1);
+            pos.setPosition(pos.getRow() + 1, pos.getColumn() - 1);
         }
         
         return mat;
@@ -112,7 +113,7 @@ public class Rook extends ChessPiece{
 
     @Override
     public String toString() {
-        return "R ";
+        return "B ";
     }
 
 }

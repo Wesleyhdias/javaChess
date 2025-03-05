@@ -33,7 +33,7 @@ public class King extends ChessPiece{
 
             }else{ 
 
-                if(oppPiece.possibleMove(position)){
+                if(oppPiece.possibleMove(position) || getBoard().hasPiace(position)){
                     return false;
                 }
             }

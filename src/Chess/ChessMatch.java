@@ -4,6 +4,9 @@
 
 import Chess.ChessPieces.King;
 import Chess.ChessPieces.Rook;
+import Chess.ChessPieces.Queen;
+import Chess.ChessPieces.Bishop;
+import Chess.ChessPieces.Horse;
 
 // import java.util.ArrayList;
 import java.util.List;
@@ -183,12 +186,25 @@ public class ChessMatch {
     }
 
     private void initialSetup(){
+        // peças brancas
         placeNewPiece('a', 1, new Rook(board, PieceColor.white));
+        placeNewPiece('b', 1, new Horse(board, PieceColor.white));
+        placeNewPiece('c', 1, new Bishop(board, PieceColor.white));
+        placeNewPiece('d', 1, new Queen(board, PieceColor.white));
         placeNewPiece('e', 1, new King(board, PieceColor.white));
-        placeNewPiece('h', 3, new Rook(board, PieceColor.white));
+        placeNewPiece('f', 1, new Bishop(board, PieceColor.white));
+        placeNewPiece('g', 1, new Horse(board, PieceColor.white));
+        placeNewPiece('h', 1, new Rook(board, PieceColor.white));
+        
+        // peças pretas
         placeNewPiece('a', 8, new Rook(board, PieceColor.black));
-        placeNewPiece('h', 6, new Rook(board, PieceColor.black));
+        placeNewPiece('b', 8, new Horse(board, PieceColor.black));
+        placeNewPiece('c', 8, new Bishop(board, PieceColor.black));
+        placeNewPiece('d', 8, new Queen(board, PieceColor.black));
         placeNewPiece('e', 8, new King(board, PieceColor.black));
+        placeNewPiece('f', 8, new Bishop(board, PieceColor.black));
+        placeNewPiece('g', 8, new Horse(board, PieceColor.black));
+        placeNewPiece('h', 8, new Rook(board, PieceColor.black));
     }
 
 }
