@@ -5,7 +5,7 @@ import Chess.PieceColor;
 import ChessBoard.Board;
 import ChessBoard.Position;
 
-public class Horse extends ChessPiece{
+public class Horse extends ChessPiece {
     public Horse(Board board, PieceColor color) {
         super(board, color);
     }
@@ -21,9 +21,9 @@ public class Horse extends ChessPiece{
 
         // cima direita
         pos.setColumn(pos.getColumn() + 1);
-        
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -32,8 +32,8 @@ public class Horse extends ChessPiece{
         // cima esquerda
         pos.setColumn(pos.getColumn() - 2);
 
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -44,9 +44,9 @@ public class Horse extends ChessPiece{
 
         // baixo direita
         pos.setColumn(pos.getColumn() + 1);
-        
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -55,8 +55,8 @@ public class Horse extends ChessPiece{
         // baixo esquerda
         pos.setColumn(pos.getColumn() - 2);
 
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -67,9 +67,9 @@ public class Horse extends ChessPiece{
 
         // esquerda cima
         pos.setRow(pos.getRow() - 1);
-        
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -78,22 +78,21 @@ public class Horse extends ChessPiece{
         // esquerda baixo
         pos.setRow(pos.getRow() + 2);
 
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
         }
 
-        
         // duas casas para direita
         pos.setPosition(position.getRow(), position.getColumn() + 2);
 
         // direita cima
         pos.setRow(pos.getRow() + 1);
-        
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
                 System.out.println("deu tru aqui!!");
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
@@ -102,13 +101,13 @@ public class Horse extends ChessPiece{
         // direita baixo
         pos.setRow(pos.getRow() - 2);
 
-        if(getBoard().hasPosition(pos)){
-            if(!getBoard().hasPiace(pos) || hasOpponentPiece(pos)){
+        if (getBoard().hasPosition(pos)) {
+            if (!getBoard().hasPiace(pos) || hasOpponentPiece(pos)) {
 
                 mat[pos.getRow()][pos.getColumn()] = true;
             }
         }
-        
+
         return mat;
     }
 

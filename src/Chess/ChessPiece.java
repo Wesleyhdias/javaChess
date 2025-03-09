@@ -4,13 +4,13 @@ import ChessBoard.Position;
 import ChessBoard.Piece;
 import ChessBoard.Board;
 
-public abstract class ChessPiece extends Piece{
+public abstract class ChessPiece extends Piece {
 
-    private PieceColor color;
+    protected PieceColor color;
 
     public ChessPiece(Board board, PieceColor color) {
         super(board);
-        this.color = color; 
+        this.color = color;
     }
 
     public PieceColor getColor() {
@@ -22,13 +22,13 @@ public abstract class ChessPiece extends Piece{
     }
 
     public ChessPosition getChessPosition() {
-        return new ChessPosition((char)(position.getColumn() + 'a'),  (8 - position.getRow()));
+        return new ChessPosition((char) (position.getColumn() + 'a'), (8 - position.getRow()));
     }
 
     protected boolean hasOpponentPiece(Position position) {
         ChessPiece piece = (ChessPiece) getBoard().getPiece(position);
 
-        return piece.getColor() != color && piece != null;
+        return piece != null && piece.getColor() != color;
     }
 
 }
