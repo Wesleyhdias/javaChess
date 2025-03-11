@@ -32,7 +32,7 @@ public class Main {
                 System.out.print("\nPara: ");
                 ChessPosition out = UI.readChessPosition(sc);
             
-                ChessPiece piece = match.movePiece(in, out);
+                ChessPiece piece = match.movePiece(in, out, sc);
 
                 if(piece != null){
                     capturedPieces.add(piece);
@@ -41,10 +41,12 @@ public class Main {
             }catch(ChessException e){ 
                 System.out.println(e.getMessage());
                 sc.nextLine();
+
             }catch(InputMismatchException e){ 
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }  
         }
+        // sc.close();
     }
 }

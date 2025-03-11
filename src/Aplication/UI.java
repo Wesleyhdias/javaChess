@@ -3,6 +3,7 @@ package Aplication;
 import java.util.InputMismatchException;
 import java.util.stream.Collectors;
 
+import Chess.ChessException;
 import Chess.ChessMatch;
 import Chess.ChessPiece;
 import Chess.ChessPosition;
@@ -186,6 +187,28 @@ public class UI {
         }
         System.out.println("  a b c d e f g h");
         System.out.println();
+    }
+
+
+    public static char askForPromotion(Scanner sc){
+
+        // Scanner sc = new Scanner(System.in);
+
+        char options[] = {'Q', 'R', 'B', 'H'};
+
+        System.out.println("What piece you want this pawn to promoto to?");
+        System.out.println("[Q]Queen, [R]Rook, [B]Bishop, [H]Horse.");
+
+        String str = sc.nextLine().toUpperCase();
+        char pieceName = str.charAt(0);
+
+        for(char c : options){
+            if(c == pieceName){
+                return pieceName;
+            }
+        }
+
+        throw new ChessException("Essa peça não existe");
     }
 
 
