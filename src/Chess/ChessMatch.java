@@ -13,7 +13,7 @@ import Chess.ChessPieces.Horse;
 import java.util.List;
 import java.util.Scanner;
 
-import Aplication.UI;
+import Application.UI;
 import ChessBoard.Position;
 import ChessBoard.Board;
 import ChessBoard.Piece;
@@ -78,8 +78,8 @@ public class ChessMatch {
         return mat;
     }
 
-    public void placeNewPiece(char colunm, int row, ChessPiece piece) {
-        board.placePiece(piece, new ChessPosition(colunm, row).toPosition());
+    public void placeNewPiece(char column, int row, ChessPiece piece) {
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
 
     private ChessPiece getKing(PieceColor color) {
@@ -218,33 +218,32 @@ public class ChessMatch {
 
     private void initialSetup() {
         // peças brancas
-        // placeNewPiece('a', 1, new Rook(board, PieceColor.white));
-        // placeNewPiece('b', 1, new Horse(board, PieceColor.white));
-        // placeNewPiece('c', 1, new Bishop(board, PieceColor.white));
-        // placeNewPiece('d', 1, new Queen(board, PieceColor.white));
+        placeNewPiece('a', 1, new Rook(board, PieceColor.white));
+        placeNewPiece('b', 1, new Horse(board, PieceColor.white));
+        placeNewPiece('c', 1, new Bishop(board, PieceColor.white));
+        placeNewPiece('d', 1, new Queen(board, PieceColor.white));
         placeNewPiece('e', 1, new King(board, PieceColor.white));
-        // placeNewPiece('f', 1, new Bishop(board, PieceColor.white));
-        // placeNewPiece('g', 1, new Horse(board, PieceColor.white));
-        // placeNewPiece('h', 1, new Rook(board, PieceColor.white));
+        placeNewPiece('f', 1, new Bishop(board, PieceColor.white));
+        placeNewPiece('g', 1, new Horse(board, PieceColor.white));
+        placeNewPiece('h', 1, new Rook(board, PieceColor.white));
 
-        // // peças pretas
-        // placeNewPiece('a', 8, new Rook(board, PieceColor.black));
-        // placeNewPiece('b', 8, new Horse(board, PieceColor.black));
-        // placeNewPiece('c', 8, new Bishop(board, PieceColor.black));
-        // placeNewPiece('d', 8, new Queen(board, PieceColor.black));
+        // peças pretas
+        placeNewPiece('a', 8, new Rook(board, PieceColor.black));
+        placeNewPiece('b', 8, new Horse(board, PieceColor.black));
+        placeNewPiece('c', 8, new Bishop(board, PieceColor.black));
+        placeNewPiece('d', 8, new Queen(board, PieceColor.black));
         placeNewPiece('e', 8, new King(board, PieceColor.black));
-        // placeNewPiece('f', 8, new Bishop(board, PieceColor.black));
-        // placeNewPiece('g', 8, new Horse(board, PieceColor.black));
-        // placeNewPiece('h', 8, new Rook(board, PieceColor.black));
+        placeNewPiece('f', 8, new Bishop(board, PieceColor.black));
+        placeNewPiece('g', 8, new Horse(board, PieceColor.black));
+        placeNewPiece('h', 8, new Rook(board, PieceColor.black));
 
-        // // piões das duas cores
-        // for (int i = 97; i <= 104; i++){
+        // piões das duas cores
+        for (int i = 97; i <= 104; i++){
             
-        //     placeNewPiece((char)i, 7, new Pawn(board, PieceColor.black));
-        //     placeNewPiece((char)i, 2, new Pawn(board, PieceColor.white));
-        // }
+            placeNewPiece((char)i, 7, new Pawn(board, PieceColor.black));
+            placeNewPiece((char)i, 2, new Pawn(board, PieceColor.white));
+        }
 
-        placeNewPiece('g', 7, new Pawn(board, PieceColor.white));
 
     }
 

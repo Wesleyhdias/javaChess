@@ -1,4 +1,4 @@
-﻿package Aplication;
+﻿package Application;
 
 import java.util.InputMismatchException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Aplication;
+package Application;
 
 import java.util.InputMismatchException;
 import java.util.stream.Collectors;
@@ -196,7 +196,7 @@ public class UI {
 
         char options[] = {'Q', 'R', 'B', 'H'};
 
-        System.out.println("What piece you want this pawn to promoto to?");
+        System.out.println("Which piece you want this pawn to promote to?");
         System.out.println("[Q]Queen, [R]Rook, [B]Bishop, [H]Horse.");
 
         String str = sc.nextLine().toUpperCase();

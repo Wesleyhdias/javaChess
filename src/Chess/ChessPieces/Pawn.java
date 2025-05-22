@@ -22,6 +22,7 @@ public class Pawn extends ChessPiece {
             pos.setPosition(position.getRow() - 1, position.getColumn());
             if (getBoard().hasPosition(pos) && !getBoard().hasPiace(pos)) {
                 mat[pos.getRow()][pos.getColumn()] = true;
+
             }
 
             if (position.getRow() == 6) {
